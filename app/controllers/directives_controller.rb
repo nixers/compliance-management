@@ -1,4 +1,5 @@
-# Copyright:: FixNix Inc. 2012
+# Author:: Miron Cuperman (mailto:miron+cms@google.com)
+# Copyright:: Google Inc. 2012
 # License:: Apache 2.0
 
 require 'csv'
@@ -46,7 +47,7 @@ class DirectivesController < BaseObjectsController
   def index
     @directives = Directive.includes(:sections)
     if params[:relevant_to].present?
-      @directives = @directives.relevant_to(Product.find_by_id(params[:relevant_to]))
+      @directives = @directives.relevant_to(Product.find(params[:relevant_to]))
     end
     if params[:s].present?
       directive_ids = @directives.db_search(params[:s]).map { |d| d.id }
@@ -136,7 +137,7 @@ class DirectivesController < BaseObjectsController
   end
 
   def sections
-    @sections = @directive.sections.includes(:controls => :implementing_controls).find_all_by_id(current_user.id)
+    @sections = @directive.sections.includes(:controls => :implementing_controls)
     if params[:s]
       @sections = @sections.fulltext_search(params[:s])
     end
@@ -232,7 +233,7 @@ class DirectivesController < BaseObjectsController
     end
 
     def load_directive
-      @directive = Directive.find_by_id(params[:id])
+      @directive = Directive.find(params[:id])
     end
 
     def directive_params
