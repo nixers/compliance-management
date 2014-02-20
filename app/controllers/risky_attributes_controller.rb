@@ -24,7 +24,7 @@ class RiskyAttributesController < BaseObjectsController
 #
 #  end
   
-  before_filter :check_risk_authorization
+  # before_filter :check_risk_authorization
 
   layout 'dashboard'
 
