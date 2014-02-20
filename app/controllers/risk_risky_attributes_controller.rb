@@ -4,7 +4,7 @@ class RiskRiskyAttributesController < BaseMappingsController
 #    allow :superuser
 #  end
   
-  before_filter :check_risk_authorization
+  # before_filter :check_risk_authorization
 
   def index
     @objects = RiskRiskyAttribute
