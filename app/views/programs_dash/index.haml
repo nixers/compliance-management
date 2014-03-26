@@ -32,8 +32,15 @@
       /   %a{:href => "#tabs-6"} Add Widget
     #tabs-1
       %p
-        = pie_chart Directive.group("kind").count
-        = pie_chart Program.group("kind").count 
+        .container.offset.well6
+          Governance and Compliance
+          = pie_chart Directive.group("kind").count
+        .container.offset.well6
+          Programs Dashboard
+          = pie_chart Program.group("kind").count
+        .container.offset.well6
+          Risk Dashboard
+          = bar_chart Risk.group(:title).sum(:likelihood_rating)
       / =render :partial => 'governance',
       /         :layout => 'layouts/widget_box',
       /         :locals => { :programs => @programs, :widget_class => "governance widget-tabs" }
